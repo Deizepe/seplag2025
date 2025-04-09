@@ -1,6 +1,8 @@
 
 # Projeto Prático – Laravel 12 REST API com Docker, PostgreSQL e MinIO
 
+Andersoon Roberto Deizepe
+
 API RESTful construída com Laravel 12, com autenticação via Sanctum (token expira em 5 minutos), persistência em PostgreSQL, upload e recuperação de imagens no Min.IO, e orquestração com Docker Compose.
 
 ---
@@ -21,8 +23,9 @@ API RESTful construída com Laravel 12, com autenticação via Sanctum (token ex
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/projetopratico.git
-cd projetopratico
+git clone https://github.com/Deizepe/seplag2025.git
+
+cd seplag2025
 ```
 
 ### 2. Configure o `.env`
@@ -75,13 +78,7 @@ docker compose exec app php artisan migrate
 
 ## 🧪 Como testar os endpoints
 
-### Testar se está funcionando
 
-```bash
-curl http://localhost:8001/api/ping
-```
-
----
 
 ## 🔐 Autenticação
 
@@ -150,18 +147,6 @@ são aceitas na API, conforme configurado no middleware de CORS.
 
 ---
 
-## 📚 Documentação de Endpoints
-
-| Método | Endpoint                                | Descrição                                       |
-|--------|-----------------------------------------|-------------------------------------------------|
-| GET    | `/api/ping`                             | Teste de saúde da API                           |
-| GET    | `/api/servidores`                       | Listagem de servidores efetivos                |
-| POST   | `/api/refresh-token`                    | Gera novo token (válido por mais 5 minutos)     |
-| POST   | `/api/servidores`                       | Cria um novo servidor efetivo (autenticado)     |
-| PUT    | `/api/servidores/{id}`                  | Atualiza um servidor efetivo                   |
-| ...    | (Outros endpoints conforme especificado)| CRUD completo de unidades, lotações etc.       |
-
----
 
 ## 📦 Scripts extras
 
