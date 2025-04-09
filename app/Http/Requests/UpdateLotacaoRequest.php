@@ -6,23 +6,18 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateLotacaoRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'unid_id' => 'sometimes|exists:unidades,unid_id',
+            'lot_data_lotacao' => 'nullable|date',
+            'lot_data_remocao' => 'nullable|date|after_or_equal:lot_data_lotacao',
+            'lot_portaria' => 'nullable|string|max:100'
         ];
     }
 }

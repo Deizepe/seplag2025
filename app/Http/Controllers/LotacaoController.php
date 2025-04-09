@@ -2,64 +2,52 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ServidorEfetivo;
+use App\Models\ServidorTemporario;
+use App\Models\Pessoa;
+use App\Models\Endereco;
+use App\Models\Cidade;
 use App\Models\Lotacao;
+use App\Models\Unidade;
+use App\Http\Requests\StoreServidorEfetivoRequest;
+use App\Http\Requests\UpdateServidorEfetivoRequest;
+use App\Http\Requests\StoreServidorTemporarioRequest;
+use App\Http\Requests\UpdateServidorTemporarioRequest;
+use App\Http\Requests\StoreLotacaoRequest;
+use App\Http\Requests\UpdateLotacaoRequest;
+use App\Http\Requests\StoreUnidadeRequest;
+use App\Http\Requests\UpdateUnidadeRequest;
 use Illuminate\Http\Request;
 
 class LotacaoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return Lotacao::with(['pessoa', 'unidade.enderecos.cidade'])
+            ->paginate($request->get('per_page', 10));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(StoreLotacaoRequest $request)
     {
-        //
+        $lotacao = Lotacao::create($request->validated());
+        return response()->json($lotacao, 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function show($id)
     {
-        //
+        return Lotacao::with(['pessoa', 'unidade.enderecos.cidade'])->findOrFail($id);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Lotacao $lotacao)
+    public function update(UpdateLotacaoRequest $request, $id)
     {
-        //
+        $lotacao = Lotacao::findOrFail($id);
+        $lotacao->update($request->validated());
+        return response()->json($lotacao);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Lotacao $lotacao)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Lotacao $lotacao)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Lotacao $lotacao)
-    {
-        //
+        Lotacao::findOrFail($id)->delete();
+        return response()->json(['message' => 'Lotação deletada com sucesso']);
     }
 }
