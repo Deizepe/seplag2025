@@ -2,6 +2,7 @@
 # Projeto Prático – Laravel 12 REST API com Docker, PostgreSQL e MinIO
 
 Andersoon Roberto Deizepe
+Inscrição: 10023
 
 API RESTful construída com Laravel 12, com autenticação via Sanctum (token expira em 5 minutos), persistência em PostgreSQL, upload e recuperação de imagens no Min.IO, e orquestração com Docker Compose.
 
